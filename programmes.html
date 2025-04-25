@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1, minimum-scale=1">
+    <title>Programmes</title>
+    
+    <style>
+        /* Webkit-based browsers (Chrome, Edge, Opera) */
+        ::-webkit-scrollbar {
+          width: 8px;
+        }
+      
+        ::-webkit-scrollbar-thumb {
+          background-color: #0C1445; /* Match your theme */
+          border-radius: 10px;
+        }
+      
+        ::-webkit-scrollbar-track {
+          background-color: #e0f3ff;
+          border-radius: 10px;
+        }
+      
+        /* Firefox support */
+        html {
+          scrollbar-width: thin;
+          scrollbar-color: #0C1445 #e0f3ff;
+        }
+      </style>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'], // Set Poppins as default font
+                    },
+                },
+            },
+        };
+    </script>
+
+    
+
+    <link rel="icon" type="image/x-icon" href="image/logo mascot.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/rippleui@1.12.1/dist/css/styles.css"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+</head>
+<body class="font-sans scroll-smooth bg-[#fff6ee] overflow-x-hidden">
+<div class="overflow-x-hidden">
+
+    <!-- Navbar -->
+    <header class="bg-white py-4 shadow-md fixed top-0 left-0 w-full z-50">
+        <div class="container mx-auto flex justify-between items-center px-6">
+            <!-- Logo -->
+            <div class="flex items-center">
+                <img src="image/logo al hakim.jpg" alt="Al Hakim Education Centre Logo" class="h-12 w-auto">
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="menu-toggle" class="lg:hidden block text-blue-900 focus:outline-none">
+                <svg id="menu-icon" class="w-6 h-6 transition-transform duration-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-8 6h8" />
+                </svg>
+            </button>
+
+            <!-- Navigation Menu -->
+            <nav id="menu" class="hidden lg:flex space-x-8 text-lg">
+                <a href="index.html" class="nav-link relative text-black font-normal hover:text-blue-400 px-4 py-2 transition duration-300">Home</a>
+                <a href="programmes.html" class="nav-link relative text-black font-normal hover:text-blue-400 px-4 py-2 transition duration-300">Programmes</a>
+                <a href="location.html" class="nav-link relative text-black font-normal hover:text-blue-400 px-4 py-2 transition duration-300">Location</a>
+                <a href="#" class="enroll-btn nav-link w-32 border-2 border-blue-900 text-white bg-blue-900 px-4 py-2 rounded-lg font-semibold text-center hover:bg-white hover:text-blue-900 transition duration-300">Enroll</a>
+
+            </nav>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-white shadow-md">
+            <nav class="flex flex-col items-center space-y-4 py-4">
+                <a href="index.html" class="mobile-nav-link text-gray-600 font-semibold">Home</a>
+                <a href="programmes.html" class="mobile-nav-link text-gray-600 font-semibold hover:text-blue-900">Programmes</a>
+                <a href="location.html" class="mobile-nav-link text-gray-600 font-semibold hover:text-blue-900">Location</a>
+                <a href="#" class="enroll-btn nav-link w-32 border-2 border-blue-900 text-white bg-blue-900 px-4 py-2 rounded-lg font-semibold text-center hover:bg-white hover:text-blue-900 transition duration-300">Enroll</a>
+            </nav>
+        </div>
+
+        <button id="go-up-btn" class="hidden fixed bottom-5 right-5 bg-blue-900 text-white p-3 rounded-full shadow-md hover:bg-blue-700 transition duration-300 z-50">
+            &#8679;
+        </button>
+        
+        <script>
+            document.querySelectorAll(".enroll-btn").forEach(button => {
+                button.addEventListener("click", function (event) {
+                    event.preventDefault();
+                    document.getElementById("enrollment-section").scrollIntoView({ behavior: "smooth" });
+                });
+            });
+
+            // Get the current page URL (case insensitive)
+            const currentPage = window.location.pathname.split("/").pop().toLowerCase();
+            console.log("Current Page:", currentPage); // Debugging
+
+            const navLinks = document.querySelectorAll(".nav-link");
+            const mobileNavLinks = document.querySelectorAll(".mobile-nav-link");
+
+            // Highlight the active link in the desktop navbar
+            navLinks.forEach(link => {
+                if (link.getAttribute("href").toLowerCase() === currentPage) {
+                    link.classList.add("text-blue-900");
+                    link.innerHTML += '<span class="absolute left-0 bottom-0 w-full h-1 bg-blue-900"></span>';
+                }
+            });
+
+            // Highlight the active link in the mobile menu
+            mobileNavLinks.forEach(link => {
+                if (link.getAttribute("href").toLowerCase() === currentPage) {
+                    link.classList.add("text-blue-900");
+                }
+            });
+
+            // Mobile menu toggle animation
+            const menuToggle = document.getElementById("menu-toggle");
+            const menuIcon = document.getElementById("menu-icon");
+            const mobileMenu = document.getElementById("mobile-menu");
+            
+            menuToggle.addEventListener("click", function() {
+                mobileMenu.classList.toggle("hidden");
+                menuIcon.classList.toggle("rotate-90");
+                if (mobileMenu.classList.contains("hidden")) {
+                    menuIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-8 6h8" />';
+                } else {
+                    menuIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />';
+                }
+            });
+
+            // Go Up Button Functionality
+            const goUpBtn = document.getElementById("go-up-btn");
+            window.addEventListener("scroll", function () {
+                if (window.scrollY > 200) {
+                    goUpBtn.classList.remove("hidden");
+                } else {
+                    goUpBtn.classList.add("hidden");
+                }
+            });
+
+            goUpBtn.addEventListener("click", function () {
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            });
+        </script>
+    </header>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const boxes = document.querySelectorAll(".box");
+            
+            boxes.forEach((box) => {
+                box.addEventListener("mouseenter", () => {
+                    boxes.forEach((b) => {
+                        if (b !== box) {
+                            b.classList.add("opacity-40"); // Dim other cards
+                        }
+                    });
+                });
+        
+                box.addEventListener("mouseleave", () => {
+                    boxes.forEach((b) => {
+                        b.classList.remove("opacity-40"); // Reset opacity
+                    });
+                });
+            });
+        });
+    </script>
+
+    <!-- Hero Section -->
+    <section class="relative w-full">
+        <div class="relative w-full min-h-[530px] md:min-h-[630px] lg:min-h-[730px] overflow-hidden">
+            <img src="image/family.jpg" alt="Hero Image" class="absolute inset-0 w-full h-full object-cover max-w-full">
+            <div class="absolute inset-0 bg-black/40 flex flex-col items-start text-white px-6 sm:px-12 md:px-16 lg:px-24 pt-28 sm:pt-28 md:pt-28 lg:pt-36">
+                <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight opacity-0 translate-y-10 transition-all duration-1000 ease-out delay-300" data-animate-fade>
+                    Which category is for<br class="hidden md:block"> my child?
+                </h1>
+                <p class="text-lg sm:text-xl md:text-2xl mt-6 sm:mt-8 md:mt-10 leading-relaxed opacity-0 translate-y-10 transition-all duration-1000 ease-out delay-500" data-animate-fade>
+                    At Al Hakim, we offer a tailored programme best for their ages.<br class="hidden sm:block">
+                    Each category has activities that focus on how to make them <br class="hidden sm:block">
+                    always learn and grow in the best way.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("opacity-100", "translate-y-0");
+                        entry.target.classList.remove("opacity-0", "translate-y-10");
+                    } else {
+                        entry.target.classList.add("opacity-0", "translate-y-10");
+                        entry.target.classList.remove("opacity-100", "translate-y-0");
+                    }
+                });
+            }, { threshold: 0.3 });
+
+            document.querySelectorAll("[data-animate-fade]").forEach(el => observer.observe(el));
+        });
+    </script>
+
+    
+
+
+    <!-- Programmes Section -->
+    <section id="Programmes" class="min-h-screen flex flex-col items-center justify-center p-8 space-y-16 bg-pattern">
+        <div class="w-[300px] h-[370px] sm:w-[350px] sm:h-[450px] md:w-[400px] md:h-[500px] lg:w-[390px] lg:h-[490px] xl:w-[400px] xl:h-[500px] 
+        grid grid-cols-2 grid-rows-2 gap-[30px] text-white relative overflow-visible z-10">
+
+            <!-- Card 1: Little Owl -->
+            <div class="programme-card bg-[#c7c7ff] rounded-[20px] flex flex-col items-center justify-center relative p-6 text-center
+                        shadow-lg shadow-[#8c8cff] overflow-hidden transition-all duration-500 hover:scale-150 hover:rotate-[360deg] hover:z-50">
+                <!-- Image & Title -->
+                <div class="absolute inset-0 flex flex-col items-center justify-center transition-all duration-500 ease-in-out hover:blur-md">
+                    <img src="image/hatch.png" alt="Little Owl" class="w-20 sm:w-24 h-20 sm:h-24 transition-all duration-500">
+                    <h3 class="sm:text-[16px] md:text-[16px] lg:text-[18px] font-semibold text-[#5A5AE6] mt-2">Little Owl</h3>
+                </div>
+
+                <!-- Info (Hidden, Appears on Hover) -->
+                <div class="absolute inset-0 flex flex-col items-center justify-center p-4 text-gray-900 bg-white bg-opacity-80 opacity-0 transition-all duration-500 hover:opacity-100">
+                    <p class="text-[12px] sm:text-[16px] md:text-[18px] lg:text-[20px] font-bold">3 to 12 months</p>
+                    <p class="text-[10px] sm:text-[14px] md:text-[16px] mt-1 text-gray-700">Focus on sensory stimulation, bonding, and motor skills.</p>
+                    <p class="text-[10px] sm:text-[10px] md:text-[10px] font-semibold text-gray-900 mt-2">Activities:</p>
+                    <ul class="list-disc text-[8px] sm:text-[8px] md:text-[9px] text-gray-800 mt-1 text-left">
+                        <li>Tummy time</li>
+                        <li>Baby gym</li>
+                        <li>Massage</li>
+                        <li>Soft toys play</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Card 2: Tiny Tots -->
+            <div class="programme-card bg-[#ffd8be] rounded-[20px] flex flex-col items-center justify-center relative p-6 text-center
+                        shadow-lg shadow-[#ffae7a] overflow-hidden transition-all duration-500 hover:scale-150 hover:rotate-[360deg] hover:z-50">
+                <div class="absolute inset-0 flex flex-col items-center justify-center transition-all duration-500 ease-in-out hover:blur-md">
+                    <img src="image/bottle.png" alt="Tiny Tots" class="w-20 sm:w-24 h-20 sm:h-24 transition-all duration-500">
+                    <h3 class="sm:text-[16px] md:text-[16px] lg:text-[18px] font-semibold text-[#FC8147] mt-2">Tiny Tots</h3>
+                </div>
+
+                <div class="absolute inset-0 flex flex-col items-center justify-center p-4 text-gray-900 bg-white bg-opacity-80 opacity-0 transition-all duration-500 hover:opacity-100">
+                    <p class="text-[12px] sm:text-[16px] md:text-[18px] lg:text-[20px] font-bold">1 year</p>
+                    <p class="text-[10px] sm:text-[14px] md:text-[16px] mt-1 text-gray-700">Hands-on learning through play, basic cognitive skills, social interaction.</p>
+                    <p class="text-[10px] sm:text-[10px] md:text-[10px] font-semibold text-gray-900 mt-2">Activities:</p>
+                    <ul class="list-disc text-[8px] sm:text-[8px] md:text-[9px] text-gray-800 mt-1 text-left">
+                        <li>Creative play</li>
+                        <li>Basic counting</li>
+                        <li>Storytelling</li>
+                        <li>Role play</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Card 3: Awesome Kids -->
+            <div class="programme-card bg-[#a9ecbf] rounded-[20px] flex flex-col items-center justify-center relative p-6 text-center
+                        shadow-lg shadow-[#75d18d] overflow-hidden transition-all duration-500 hover:scale-150 hover:rotate-[360deg] hover:z-50">
+                <div class="absolute inset-0 flex flex-col items-center justify-center transition-all duration-500 ease-in-out hover:blur-md">
+                    <img src="image/pallet.png" alt="Awesome Kids" class="w-20 sm:w-24 h-20 sm:h-24 transition-all duration-500">
+                    <h3 class="sm:text-[16px] md:text-[16px] lg:text-[18px] font-semibold text-[#42A650] mt-2">Awesome Kids</h3>
+                </div>
+
+                <div class="absolute inset-0 flex flex-col items-center justify-center p-4 text-gray-900 bg-white bg-opacity-80 opacity-0 transition-all duration-500 hover:opacity-100">
+                    <p class="text-[12px] sm:text-[16px] md:text-[18px] lg:text-[20px] font-bold">2 years</p>
+                    <p class="text-[10px] sm:text-[12px] md:text-[15px] mt-1 text-gray-700">Encouraging first steps, communication, and basic independence.</p>
+                    <p class="text-[10px] sm:text-[10px] md:text-[10px] font-semibold text-gray-900 mt-2">Activities:</p>
+                    <ul class="list-disc text-[8px] sm:text-[8px] md:text-[9px] text-gray-800 mt-1 text-left">
+                        <li>Flashcards</li>
+                        <li>Sensory play</li>
+                        <li>Music & movement</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Card 4: Amazing Kids -->
+            <div class="programme-card bg-[#f3bbe1] rounded-[20px] flex flex-col items-center justify-center relative p-6 text-center
+                        shadow-lg shadow-[#e78ac4] overflow-hidden transition-all duration-500 hover:scale-150 hover:rotate-[360deg] hover:z-50">
+                <div class="absolute inset-0 flex flex-col items-center justify-center transition-all duration-500 ease-in-out hover:blur-md">
+                    <img src="image/star.png" alt="Amazing Kids" class="w-20 sm:w-24 h-20 sm:h-24 transition-all duration-500">
+                    <h3 class="sm:text-[16px] md:text-[16px] lg:text-[18px] font-semibold text-[#D936A6] mt-2">Amazing Kids</h3>
+                </div>
+
+                <div class="absolute inset-0 flex flex-col items-center justify-center p-4 text-gray-900 bg-white bg-opacity-80 opacity-0 transition-all duration-500 hover:opacity-100">
+                    <p class="text-[12px] sm:text-[16px] md:text-[18px] lg:text-[20px] font-bold">3 & 4 years</p>
+                    <p class="text-[8px] sm:text-[12px] md:text-[14px] mt-1 text-gray-700">Preparing for structured learning, emotional development, and creativity.</p>
+                    <p class="text-[10px] sm:text-[10px] md:text-[10px] font-semibold text-gray-900 mt-2">Activities:</p>
+                    <ul class="list-disc text-[8px] sm:text-[8px] md:text-[9px] text-gray-800 mt-1 text-left">
+                        <li>Early literacy</li>
+                        <li>Teamwork</li>
+                        <li>Theme-based learning</li>
+                        <li>Exploration</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </section>
+        <style>
+            .programme-card {
+            position: relative;
+            cursor: pointer;
+        }
+
+        /* Default Front & Back State */
+        .card-front {
+            transition: opacity 0.5s ease-in-out;
+        }
+        .card-back {
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        /* Show Details When Card is Clicked (Mobile) */
+        .programme-card.active .card-back {
+            opacity: 1;
+        }
+        .programme-card.active .card-front {
+            opacity: 0;
+        }
+
+        /* ✨ Short Animation on Scroll (For Mobile Users) */
+        @media (max-width: 768px) {
+            .scroll-hint {
+                animation: tilt-shake 0.8s ease-in-out;
+            }
+
+            @keyframes tilt-shake {
+                0% { transform: rotate(0deg); }
+                25% { transform: rotate(2deg); }
+                50% { transform: rotate(-2deg); }
+                75% { transform: rotate(2deg); }
+                100% { transform: rotate(0deg); }
+            }
+        }
+
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const cards = document.querySelectorAll(".programme-card");
+
+            // Scroll Animation Observer (For Mobile)
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && window.innerWidth <= 768) { 
+                        entry.target.classList.add("scroll-hint"); // Add animation class
+                        setTimeout(() => entry.target.classList.remove("scroll-hint"), 1000); // Remove after animation
+                    }
+                });
+            }, { threshold: 0.5 }); // Trigger when 50% visible
+
+            cards.forEach(card => {
+                observer.observe(card);
+
+                // Click to show info
+                card.addEventListener("click", function () {
+                    this.classList.toggle("active");
+                });
+            });
+        });
+    </script>
+    <style>
+        .bg-pattern {
+        width: 100%;
+        height: 100%;
+        --color: #E1E1E1;
+        background-color: #fff6ee;
+        background-image: linear-gradient(0deg, transparent 24%, var(--color) 25%, var(--color) 26%, transparent 27%,transparent 74%, var(--color) 75%, var(--color) 76%, transparent 77%,transparent),
+        linear-gradient(90deg, transparent 24%, var(--color) 25%, var(--color) 26%, transparent 27%,transparent 74%, var(--color) 75%, var(--color) 76%, transparent 77%,transparent);
+        background-size: 55px 55px;
+        }
+    </style>
+    
+
+
+    <!-- 6 Key Development Areas -->
+    <div id="development" class="text-center bg-[#fff6ee] pt-12 pb-20 px-2">
+        <!-- Heading -->
+        <h1 class="text-4xl md:text-5xl font-extrabold text-[#000000] mt-20 mb-36 opacity-0 transition-all duration-1000" id="dev-heading">
+            6 Key Development Areas
+        </h1>
+
+        <!-- Grid Container -->
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-6 gap-8 max-w-none mx-auto justify-items-center">
+            
+            <!-- Cards -->
+            <div class="relative flex flex-col items-center bg-blue-100 overflow-visible flip-card opacity-0 transform rotate-y-180 transition-all duration-1000 hover:scale-110 hover:-translate-y-3 hover:shadow-2xl hover:duration-100" data-animate>
+                <figure class="absolute -top-16 w-full flex justify-center overflow-visible">
+                    <img src="image/physical.png" alt="Physical" class="w-[150px] object-contain"/>
+                </figure>
+                <div class="card-body text-center space-y-4 mt-32">
+                    <h3 class="text-2xl font-bold text-[#134A96]">Physical</h3>
+                    <p class="text-[#134A96] text-sm">Strength, coordination, and movement</p>
+                </div>
+            </div>
+
+            <div class="relative flex flex-col items-center bg-blue-200 overflow-visible flip-card opacity-0 transform rotate-y-180 transition-all duration-1000 delay-100 hover:scale-110 hover:-translate-y-3 hover:shadow-2xl hover:duration-100" data-animate>
+                <figure class="absolute -top-16 w-full flex justify-center overflow-visible">
+                    <img src="image/cognitive.png" alt="Cognitive" class="w-[150px] object-contain"/>
+                </figure>
+                <div class="card-body text-center space-y-4 mt-32">
+                    <h3 class="text-2xl font-bold text-[#0F5298]">Cognitive</h3>
+                    <p class="text-[#0F5298] text-sm">Thinking, problem-solving, and curiosity</p>
+                </div>
+            </div>
+
+            <div class="relative flex flex-col items-center bg-purple-200 overflow-visible flip-card opacity-0 transform rotate-y-180 transition-all duration-1000 delay-200 hover:scale-110 hover:-translate-y-3 hover:shadow-2xl hover:duration-100" data-animate>
+                <figure class="absolute -top-16 w-full flex justify-center overflow-visible">
+                    <img src="image/social.png" alt="Social" class="w-[150px] object-contain"/>
+                </figure>
+                <div class="card-body text-center space-y-4 mt-32">
+                    <h3 class="text-2xl font-bold text-[#573D98]">Social</h3>
+                    <p class="text-[#573D98] text-sm">Interaction, teamwork, and friendships</p>
+                </div>
+            </div>
+
+            <div class="relative flex flex-col items-center bg-orange-200 overflow-visible flip-card opacity-0 transform rotate-y-180 transition-all duration-1000 delay-300 hover:scale-110 hover:-translate-y-3 hover:shadow-2xl hover:duration-100" data-animate>
+                <figure class="absolute -top-16 w-full flex justify-center overflow-visible">
+                    <img src="image/emotional.png" alt="Emotional" class="w-[150px] object-contain"/>
+                </figure>
+                <div class="card-body text-center space-y-4 mt-32">
+                    <h3 class="text-2xl font-bold text-[#B94E1F]">Emotional</h3>
+                    <p class="text-[#B94E1F] text-sm">Self-awareness, confidence, and self-expression</p>
+                </div>
+            </div>
+
+            <div class="relative flex flex-col items-center bg-red-200 overflow-visible flip-card opacity-0 transform rotate-y-180 transition-all duration-1000 delay-400 hover:scale-110 hover:-translate-y-3 hover:shadow-2xl hover:duration-100" data-animate>
+                <figure class="absolute -top-16 w-full flex justify-center overflow-visible">
+                    <img src="image/language.png" alt="Language" class="w-[150px] object-contain"/>
+                </figure>
+                <div class="card-body text-center space-y-4 mt-32">
+                    <h3 class="text-2xl font-bold text-[#B33B38]">Language</h3>
+                    <p class="text-[#B33B38] text-sm">Speech, listening, and comprehension</p>
+                </div>
+            </div>
+
+            <div class="relative flex flex-col items-center bg-green-200 overflow-visible flip-card opacity-0 transform rotate-y-180 transition-all duration-1000 delay-500 hover:scale-110 hover:-translate-y-3 hover:shadow-2xl hover:duration-100" data-animate>
+                <figure class="absolute -top-16 w-full flex justify-center overflow-visible">
+                    <img src="image/creative.png" alt="Creative" class="w-[150px] object-contain"/>
+                </figure>
+                <div class="card-body text-center space-y-4 mt-32">
+                    <h3 class="text-2xl font-bold text-[#418C3B]">Creative</h3>
+                    <p class="text-[#418C3B] text-sm">Art, music, and imaginative play</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Flip in when entering viewport
+                        entry.target.classList.remove("opacity-0", "rotate-y-180");
+                    } else {
+                        // Flip out when leaving viewport
+                        entry.target.classList.add("opacity-0", "rotate-y-180");
+                    }
+                });
+            }, { threshold: 0.2 });
+
+            document.querySelectorAll("[data-animate]").forEach(card => observer.observe(card));
+            observer.observe(document.getElementById("dev-heading"));
+        });
+    </script>
+
+
+
+
+    <div id="themes" class="pt-16 pb-10 px-4 sm:px-6 md:px-16">
+        <h1 class="text-4xl font-extrabold text-[#0C1445] mb-12 text-center opacity-0 transition-all duration-1000 translate-y-10" id="theme-heading">
+            Monthly Learning Themes
+        </h1>
+
+        <div class="max-w-4xl mx-auto">
+            <div class="relative">
+                <!-- Slider Container -->
+                <div class="flex flex-col md:flex-row items-center gap-6 md:gap-12">
+                    <!-- Image (Left on desktop, top on mobile) -->
+                    <div class="w-full md:w-1/2">
+                        <div class="relative aspect-square max-w-[200px] sm:max-w-[250px] md:max-w-[350px] mx-auto">
+                            <div class="slider-images">
+                                <!-- Images will be dynamically inserted here -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Text and Navigation (Right on desktop, bottom on mobile) -->
+                    <div class="w-full md:w-1/2 text-center md:text-left">
+                        <div class="slider-text min-h-[80px] sm:min-h-[100px] relative">
+                            <!-- Text will be dynamically inserted here -->
+                        </div>
+                        <!-- Navigation (Arrows and Bullets) -->
+                        <div class="flex flex-col items-center md:items-start mt-4 sm:mt-6 gap-3">
+                            <div class="flex gap-4">
+                                <button class="prev-btn bg-[#0C1445] text-white p-2 rounded-full hover:bg-[#1F2A66] transition-colors" aria-label="Previous slide">
+                                    <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                                </button>
+                                <button class="next-btn bg-[#0C1445] text-white p-2 rounded-full hover:bg-[#1F2A66] transition-colors" aria-label="Next slide">
+                                    <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                </button>
+                            </div>
+                            <div class="slider-bullets flex gap-2 mt-8 ">
+                                <!-- Bullets will be dynamically inserted here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <style>
+            .slider-images img {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+                opacity: 0;
+                transition: opacity 0.5s ease-in-out;
+            }
+
+            .slider-images img.active {
+                opacity: 1;
+            }
+
+            .slider-text div {
+                opacity: 0;
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                transition: opacity 0.5s ease-in-out;
+            }
+
+            .slider-text div.active {
+                opacity: 1;
+            }
+
+            .slider-bullets span {
+                width: 10px;
+                height: 10px;
+                background-color: #d1d5db;
+                border-radius: 50%;
+                display: inline-block;
+                cursor: pointer;
+                transition: background-color 0.3s;
+            }
+
+            .slider-bullets span.active {
+                background-color: #0C1445;
+            }
+        </style>
+
+        <script>
+            const themes = [
+                { month: 'January', theme: 'Myself', image: 'image/january.png' },
+                { month: 'February', theme: 'My Family', image: 'image/february.png' },
+                { month: 'March', theme: 'My House', image: 'image/march.png' },
+                { month: 'April', theme: 'My School', image: 'image/april.png' },
+                { month: 'May', theme: 'Animals', image: 'image/may.png' },
+                { month: 'June', theme: 'Transportation', image: 'image/june.png' },
+                { month: 'July', theme: 'Occupation', image: 'image/july.png' },
+                { month: 'August', theme: 'Fruits & Vegetables', image: 'image/august.png' },
+                { month: 'September', theme: 'The Food We Eat', image: 'image/september.png' },
+                { month: 'October', theme: 'Festival', image: 'image/october.png' },
+                { month: 'November', theme: 'Season', image: 'image/november.png' },
+                { month: 'December', theme: 'Weather', image: 'image/december.png' }
+            ];
+
+            function initSlider() {
+                const imageContainer = document.querySelector('.slider-images');
+                const textContainer = document.querySelector('.slider-text');
+                const bulletContainer = document.querySelector('.slider-bullets');
+                let currentIndex = 0;
+                let autoSlideInterval = null;
+
+                // Populate images
+                themes.forEach((theme, index) => {
+                    const img = document.createElement('img');
+                    img.src = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
+                    img.dataset.src = theme.image;
+                    img.alt = theme.month;
+                    img.className = 'lazy';
+                    img.loading = 'lazy';
+                    if (index === 0) img.classList.add('active');
+                    imageContainer.appendChild(img);
+                });
+
+                // Populate text
+                themes.forEach((theme, index) => {
+                    const text = document.createElement('div');
+                    text.innerHTML = `
+                        <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-[#0C1445] mb-2">${theme.month}</h3>
+                        <p class="text-sm sm:text-base md:text-lg text-gray-700">${theme.theme}</p>
+                    `;
+                    if (index === 0) text.classList.add('active');
+                    textContainer.appendChild(text);
+                });
+
+                // Populate bullets
+                themes.forEach((_, index) => {
+                    const bullet = document.createElement('span');
+                    if (index === 0) bullet.classList.add('active');
+                    bulletContainer.appendChild(bullet);
+                    bullet.addEventListener('click', () => {
+                        goToSlide(index);
+                        pauseAutoSlide();
+                    });
+                });
+
+                // Lazy load images
+                const lazyImages = document.querySelectorAll('img.lazy');
+                const observer = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const img = entry.target;
+                            img.src = img.dataset.src;
+                            img.classList.remove('lazy');
+                            observer.unobserve(img);
+                        }
+                    });
+                }, { rootMargin: '0px 0px 200px 0px' });
+                lazyImages.forEach(img => observer.observe(img));
+
+                // Slide navigation
+                function goToSlide(index) {
+                    const images = document.querySelectorAll('.slider-images img');
+                    const texts = document.querySelectorAll('.slider-text div');
+                    const bullets = document.querySelectorAll('.slider-bullets span');
+
+                    images[currentIndex].classList.remove('active');
+                    texts[currentIndex].classList.remove('active');
+                    bullets[currentIndex].classList.remove('active');
+
+                    currentIndex = (index + themes.length) % themes.length;
+
+                    images[currentIndex].classList.add('active');
+                    texts[currentIndex].classList.add('active');
+                    bullets[currentIndex].classList.add('active');
+                }
+
+                // Auto slide
+                function startAutoSlide() {
+                    clearInterval(autoSlideInterval);
+                    autoSlideInterval = setInterval(() => {
+                        goToSlide(currentIndex + 1);
+                    }, 5000);
+                }
+
+                function pauseAutoSlide() {
+                    clearInterval(autoSlideInterval);
+                    setTimeout(startAutoSlide, 10000); // Resume after 10s
+                }
+
+                // Arrow controls
+                document.querySelector('.prev-btn').addEventListener('click', () => {
+                    goToSlide(currentIndex - 1);
+                    pauseAutoSlide();
+                });
+
+                document.querySelector('.next-btn').addEventListener('click', () => {
+                    goToSlide(currentIndex + 1);
+                    pauseAutoSlide();
+                });
+
+                // Start auto slide
+                startAutoSlide();
+
+                // Fade-in animation for heading
+                const heading = document.getElementById('theme-heading');
+                const headingObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('opacity-100', 'translate-y-0');
+                        } else {
+                            entry.target.classList.remove('opacity-100', 'translate-y-0');
+                        }
+                    });
+                }, { threshold: 0.2 });
+                headingObserver.observe(heading);
+            }
+
+            document.addEventListener('DOMContentLoaded', () => {
+                if (document.querySelector('.slider-images')) {
+                    initSlider();
+                }
+            });
+        </script>
+    </div>
+
+
+
+    <div class="px-4 sm:px-6 md:px-12 lg:px-20 xl:px-28 py-10 space-y-6 max-w-full mx-auto mt-0 mb-20 opacity-0 translate-y-10 transition-all duration-1000" data-animate>
+        <!-- Accordion Item 1: Operating Hours -->
+        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <div class="accordion-header flex justify-between items-center px-4 sm:px-6 md:px-8 py-5 sm:py-6 bg-[#d8f1ff] hover:bg-[#005fa8] text-black hover:text-white transition-all duration-300 cursor-pointer">
+                <h3 class="font-semibold text-base sm:text-lg">Operating Hours</h3>
+                <span class="icon text-xl font-bold transition-transform duration-300">+</span>
+            </div>
+            <div class="accordion-content max-h-0 overflow-hidden transition-all duration-300 ease-out">
+                <div class="px-4 sm:px-6 md:px-8 py-4">
+                    <table class="w-full border-collapse text-sm sm:text-base">
+                        <tr class="border-b">
+                            <td class="py-2 font-medium text-black">Full Day</td>
+                            <td class="py-2 text-gray-700">7 AM - 6 PM</td>
+                        </tr>
+                        <tr class="border-b">
+                            <td class="py-2 font-medium text-black">Half Day (Morning)</td>
+                            <td class="py-2 text-gray-700">7 AM - 1 PM</td>
+                        </tr>
+                        <tr class="border-b">
+                            <td class="py-2 font-medium text-black">Half Day (Afternoon)</td>
+                            <td class="py-2 text-gray-700">12 PM - 6 PM</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 font-medium text-black">Overtime Rate</td>
+                            <td class="py-2 text-gray-700">RM 15/Hour</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Accordion Item 2: Registration Requirements -->
+        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <div class="accordion-header flex justify-between items-center px-4 sm:px-6 md:px-8 py-5 sm:py-6 bg-[#d8f1ff] hover:bg-[#005fa8] text-black hover:text-white transition-all duration-300 cursor-pointer">
+                <h3 class="font-semibold text-base sm:text-lg">Registration Requirements</h3>
+                <span class="icon text-xl font-bold transition-transform duration-300">+</span>
+            </div>
+            <div class="accordion-content max-h-0 overflow-hidden transition-all duration-300 ease-out">
+                <div class="px-4 sm:px-6 md:px-8 py-4">
+                    <p class="font-medium text-black text-sm sm:text-base">🔍 Required Documents:</p>
+                    <ul class="list-disc list-inside text-gray-700 mt-2 space-y-1 text-sm sm:text-base">
+                        <li>👨‍👧‍👦 Photocopy of MyKid & Birth Certificate</li>
+                        <li>🎬 4 Passport-Sized Photos</li>
+                        <li>👤 Photocopy of Parents' MyCard</li>
+                        <li>💉 Photocopy of Immunization Card</li>
+                        <li>🌍 Photocopy of COVID-19 Vaccination Certificate (Parents)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Accordion Item 3: Document Preparation -->
+        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <div class="accordion-header flex justify-between items-center px-4 sm:px-6 md:px-8 py-5 sm:py-6 bg-[#d8f1ff] hover:bg-[#005fa8] text-black hover:text-white transition-all duration-300 cursor-pointer">
+                <h3 class="font-semibold text-base sm:text-lg">Document Preparation</h3>
+                <span class="icon text-xl font-bold transition-transform duration-300">+</span>
+            </div>
+            <div class="accordion-content max-h-0 overflow-hidden transition-all duration-300 ease-out">
+                <div class="px-4 sm:px-6 md:px-8 py-4 text-sm sm:text-base text-gray-700 space-y-2">
+                    <p>📚 Ensure all documents are complete before submission.</p>
+                    <p>📞 Before and after preparing the documents, please contact us via WhatsApp to verify if you have all the required files.</p>
+                    <p>👥 <span class="font-medium">Contact us on WhatsApp:</span> <a href="https://wa.me/your-number" class="text-blue-600 font-semibold underline break-words">Click here</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <style>
+        /* Ensure enough space at the bottom */
+        .accordion-content {
+            transition: max-height 0.3s ease-out;
+        }
+    </style>
+    
+    <script>
+        document.querySelectorAll('.accordion-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const content = header.nextElementSibling;
+                const icon = header.querySelector('.icon');
+                const allContents = document.querySelectorAll('.accordion-content');
+                const allIcons = document.querySelectorAll('.icon');
+    
+                // Close all other accordions
+                allContents.forEach(c => {
+                    if (c !== content) {
+                        c.style.maxHeight = "0";
+                    }
+                });
+    
+                // Reset all icons
+                allIcons.forEach(i => {
+                    if (i !== icon) {
+                        i.textContent = "+";
+                    }
+                });
+    
+                // Toggle the clicked accordion
+                if (content.style.maxHeight === "0px" || content.style.maxHeight === "") {
+                    content.style.maxHeight = content.scrollHeight + "px";
+                    icon.textContent = "-";
+                } else {
+                    content.style.maxHeight = "0";
+                    icon.textContent = "+";
+                }
+    
+                // Ensure the accordion is fully visible by scrolling into view if needed
+                setTimeout(() => {
+                    const accordion = header.parentElement;
+                    const rect = accordion.getBoundingClientRect();
+                    const viewportHeight = window.innerHeight;
+                    if (rect.bottom > viewportHeight) {
+                        accordion.scrollIntoView({ behavior: 'smooth', block: 'end' });
+                    }
+                }, 300);
+            });
+        });
+    
+        // Scroll animation
+        document.addEventListener("DOMContentLoaded", function () {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.remove("opacity-0", "translate-y-10");
+                    } else {
+                        entry.target.classList.add("opacity-0", "translate-y-10");
+                    }
+                });
+            }, { threshold: 0.2 });
+    
+            observer.observe(document.querySelector("[data-animate]"));
+        });
+    </script>
+
+
+    <!-- Enrollment Section -->
+    <section id="enrollment-section" class="bg-[#D94D66] text-white py-20 px-8 md:px-20 lg:flex lg:items-center lg:justify-between min-h-[750px]">
+        <!-- Left Content -->
+        <div class="lg:w-1/2 flex flex-col justify-center h-full text-center lg:text-left px-5 md:px-9 lg:px-12">
+            <h2 class="text-4xl md:text-5xl font-bold mb-4 opacity-0 translate-y-10 transition-all duration-700 ease-out" data-animate-bounce>
+                Ready to Enroll?
+            </h2>
+            <p class="text-lg mb-2 md:mb-4 opacity-0 translate-y-5 transition-all duration-700 ease-out" data-animate-fade>
+                Register with us now through WhatsApp!
+            </p>
+            <p class="italic mb-4 opacity-0 translate-y-5 transition-all duration-700 ease-out" data-animate-fade>
+                or need more information?
+            </p>
+
+            <!-- WhatsApp Button with Uiverse.io styling -->
+            <a href="https://wa.link/ox345g" target="_blank">
+                <button class="relative px-10 py-5 h-15 mt-7 rounded-lg bg-white isolation-auto z-10 border-1 border-teal-500 before:absolute before:w-full before:transition-all 
+                before:duration-700 before:hover:w-full hover:text-white before:-right-full before:hover:right-0 before:rounded-full before:bg-[#14B8A6] 
+                before:-z-10 before:aspect-square before:hover:scale-150 overflow-hidden before:hover:duration-700 inline-flex items-center 
+                justify-center px-4 py-3 text-lg font-semibold text-black bg-white border border-gray-200 rounded-lg shadow-sm gap-x-2 hover:bg-gray-50 
+                disabled:opacity-50 disabled:pointer-events-none opacity-0 translate-y-5 transition-all duration-700 ease-out" data-animate-fade>
+                    Contact Us
+                </button>
+            </a>
+        </div>
+
+        <!-- Right Form -->
+        <div class="lg:w-1/2 mt-10 lg:mt-0 flex justify-center lg:justify-end">
+            <!-- Formspree Form -->
+            <form action="https://formspree.io/f/mvgknyyv" method="POST" class="w-full max-w-[550px] bg-white p-8 rounded-lg shadow-lg border-2 border-gray-200">
+                <!-- Name -->
+                <label class="block text-gray-700 mb-5">
+                    Name:
+                    <input type="text" name="name" required
+                        class="w-full p-3 mt-2 bg-white rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition duration-300">
+                </label>
+
+                <!-- Phone Number -->
+                <label class="block text-gray-700 mb-5">
+                    Phone Number:
+                    <input type="tel" name="phone"
+                        pattern="[0-9]{10,15}" title="Please enter a valid phone number (10-15 digits)" required
+                        class="w-full p-3 mt-2 bg-white rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition duration-300">
+                </label>
+
+                <!-- Email -->
+                <label class="block text-gray-700 mb-5">
+                    Email:
+                    <input type="email" name="email" required
+                        class="w-full p-3 mt-2 bg-white rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition duration-300">
+                </label>
+
+                <!-- Message -->
+                <label class="block text-gray-700 mb-6">
+                    Message:
+                    <textarea name="message" required
+                        class="w-full p-4 mt-2 bg-white rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition duration-300 resize-y max-h-[200px]"></textarea>
+                </label>
+
+                <!-- Submit Button -->
+                <button type="submit"
+                    class="px-8 py-4 bg-teal-500 text-white rounded-lg hover:bg-teal-600 transition duration-300 w-full">
+                    Send
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <script>
+        // Scroll Animation (Slide in, Bounce, and Fade Effects)
+        document.addEventListener("DOMContentLoaded", function () {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        if (entry.target.dataset.animateBounce !== undefined) {
+                            entry.target.classList.add("animate-bounce");
+                        }
+                        entry.target.classList.remove("opacity-0", "translate-y-10", "translate-y-5", "translate-x-10");
+                    } else {
+                        entry.target.classList.add("opacity-0", "translate-y-10", "translate-y-5", "translate-x-10");
+                    }
+                });
+            }, { threshold: 0.3 });
+
+            document.querySelectorAll("[data-animate-bounce], [data-animate-fade], [data-animate-slide]").forEach(el => observer.observe(el));
+        });
+    </script>
+
+
+
+
+<section style="position: relative; overflow: hidden;">
+    <!-- Wavy Background -->
+    <div class="wave">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  
+    <!-- Footer Content -->
+    <footer class=" text-gray-700 py-12 px-6 text-center relative z-10">
+      <!-- Logo and Contact -->
+      <div class="flex flex-col md:flex-row justify-center items-center gap-8">
+        <img src="image/logo al hakim transparent.png" alt="Al Hakim Logo" class="w-40 md:w-52">
+        <div>
+          <h2 class="text-2xl font-bold">013-7797956 / 011-11407956</h2>
+          <p class="text-sm tracking-wide">Miss Fahar & Miss Emma</p>
+        </div>
+      </div>
+  
+      <!-- Operating Hours -->
+      <div class="mt-8   ">
+        <p class="font-semibold text-lg">Operating Hours</p>
+        <p>Monday to Friday (excluding public holiday)</p>
+        <p>7:00 AM – 6:00 PM</p>
+        <p class="mt-2">Halfday</p>
+        <p>7:00 AM – 1:00 PM <span class="text-gray-500">or</span> 12:00 – 6:00 PM</p>
+
+      </div>
+  
+      <!-- Career Section -->
+      <div class="mt-10">
+        <h3 class="font-semibold text-lg mb-2">Career Opportunities</h3>
+        <p class="mb-4">Interested to join our team? Reach out to us:</p>
+        <div class="flex justify-center flex-wrap gap-4">
+          <a href="https://wa.me/60123456789" target="_blank"
+            class="bg-white text-[#25D366] px-4 py-2 rounded-full shadow-md hover:bg-gray-100">
+            <i class="fab fa-whatsapp mr-2"></i>WhatsApp
+          </a>
+          <a href="https://mail.google.com/mail/?view=cm&fs=1&to=alhakimeducationcentre@gmail.com&su=Career%20Opportunities"
+            class="bg-white text-blue-700 px-4 py-2 rounded-full shadow-md hover:bg-gray-100">
+            <i class="fas fa-envelope mr-2"></i>Email
+          </a>
+        </div>
+      </div>
+  
+      <!-- Social Media Icons -->
+      <div class="mt-10">
+        <p class="font-semibold mb-4">Follow Us</p>
+        <div class="flex justify-center gap-6 text-2xl">
+                <!-- WhatsApp -->
+                <a href="https://wa.link/a2dz3u" target="_blank" 
+                class="bg-[#25D366] text-white text-xl w-9 h-9 flex items-center justify-center rounded-full">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+
+                <!-- Facebook -->
+                <a href="https://www.facebook.com/alhakimeducationcentre" target="_blank" 
+                class="bg-[#4267b2] text-white text-xl w-9 h-9 flex items-center justify-center rounded-full">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+
+                <!-- Instagram -->
+                <a href="https://www.instagram.com/alhakimeducationcentre?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" 
+                target="_blank" 
+                class="bg-[#e1306c] text-white text-xl w-9 h-9 flex items-center justify-center rounded-full">
+                    <i class="fab fa-instagram"></i>
+                </a>
+
+                <!-- TikTok -->
+                <a href="https://www.tiktok.com/@alhakimeducationcenter?is_from_webapp=1&sender_device=pc" 
+                target="_blank" 
+                class="bg-[#000000] text-white text-xl w-9 h-9 flex items-center justify-center rounded-full">
+                    <i class="fab fa-tiktok"></i>
+                </a>
+        </div>
+      </div>
+  
+      <!-- Copyright -->
+      <div class="mt-10 text-sm">
+        <p>© 2025 Al Hakim Education Centre. All rights reserved.</p>
+      </div>
+    </footer>
+  
+    <!-- Wavy Background Style -->
+    <style>
+      @import url("https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap");
+  
+      .wave {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background: #4973ff;
+        box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.5);
+        z-index: 0;
+        overflow: hidden;
+      }
+  
+      .wave span {
+        position: absolute;
+        width: 390vh;
+        height: 390vh;
+        top: 0;
+        left: 50%;
+        transform: translate(-50%, -75%);
+      }
+  
+      .wave span:nth-child(1) {
+        border-radius: 45%;
+        background: rgb(255, 255, 255);
+        animation: animate 5s linear infinite;
+      }
+  
+      .wave span:nth-child(2) {
+        border-radius: 40%;
+        background: rgba(208, 208, 208, 0.5);
+        animation: animate 10s linear infinite;
+      }
+  
+      .wave span:nth-child(3) {
+        border-radius: 42.5%;
+        background: rgba(255, 255, 255, 0.5);
+        animation: animate 15s linear infinite;
+      }
+  
+      @keyframes animate {
+        0% {
+          transform: translate(-50%, -75%) rotate(0deg);
+        }
+  
+        100% {
+          transform: translate(-50%, -75%) rotate(360deg);
+        }
+      }
+  
+      footer * {
+        font-family: "Poppins", sans-serif;
+      }
+    </style>
+  </section>
+</div>
+
+    <!-- Registration Notification Popup -->
+    <div id="ad-popup"
+        class="fixed bottom-20 right-5 md:right-6 bg-white shadow-xl rounded-lg border border-blue-400 p-4 flex items-center space-x-4 max-w-sm z-50 opacity-0 pointer-events-none transition-opacity duration-500">
+        <img src="image/2025Registration.png" alt="Registration Ad" class="w-16 h-16 rounded-md object-cover">
+        <div>
+            <p class="text-sm font-semibold text-blue-900">Now Open: 2025 Registration!</p>
+            <a href="https://wa.me/601111407956" target="_blank" class="text-blue-600 hover:underline text-xs">
+                Click here to register
+            </a>
+        </div>
+        <button id="close-ad" class="text-gray-400 hover:text-red-500 font-bold text-xl ml-2">&times;</button>
+    </div>
+
+    <style>
+        @keyframes slideInUp {
+        0% {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        }
+
+        .animate-slide-in {
+        animation: slideInUp 0.6s ease-out forwards;
+        }
+    </style>
+
+    <script>
+        window.addEventListener("DOMContentLoaded", () => {
+        const ad = document.getElementById("ad-popup");
+        const closeBtn = document.getElementById("close-ad");
+    
+        // Show the ad after 1 second
+        setTimeout(() => {
+            ad.classList.remove("opacity-0", "pointer-events-none");
+            ad.classList.add("opacity-100");
+    
+            // Auto-dismiss after 8 seconds
+            setTimeout(() => {
+            ad.classList.add("opacity-0");
+            ad.classList.remove("opacity-100");
+    
+            // Fully disable pointer events after fade out
+            setTimeout(() => {
+                ad.classList.add("pointer-events-none");
+            }, 500);
+            }, 8000);
+        }, 1000);
+    
+        // Manual close button
+        closeBtn.addEventListener("click", () => {
+            ad.classList.add("opacity-0");
+            ad.classList.remove("opacity-100");
+    
+            setTimeout(() => {
+            ad.classList.add("pointer-events-none");
+            }, 500);
+        });
+        });
+    </script>
+</body>
+</html>
